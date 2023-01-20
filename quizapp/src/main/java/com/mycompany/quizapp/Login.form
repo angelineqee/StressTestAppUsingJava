@@ -6,6 +6,7 @@
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[576, 320]"/>
     </Property>
+
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -40,15 +41,25 @@
                       </Group>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextField2" min="-2" pref="189" max="-2" attributes="0"/>
+
                           <Component id="jTextField1" min="-2" pref="189" max="-2" attributes="0"/>
                           <Component id="jButton1" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="ClickToSignIn" alignment="0" min="-2" max="-2" attributes="0"/>
+
                       </Group>
                   </Group>
               </Group>
               <EmptySpace pref="135" max="32767" attributes="0"/>
           </Group>
+
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="230" max="32767" attributes="0"/>
+                  <Component id="jPasswordField1" min="-2" pref="187" max="-2" attributes="0"/>
+                  <EmptySpace pref="134" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -61,17 +72,23 @@
                   <Component id="LogInUsernameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextField1" alignment="3" pref="33" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="26" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="LogInPasswordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField2" alignment="3" pref="33" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+
+              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <Component id="LogInPasswordLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" pref="31" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" pref="24" max="-2" attributes="0"/>
+              <Component id="ClickToSignIn" min="-2" pref="24" max="-2" attributes="0"/>
               <EmptySpace pref="32" max="32767" attributes="0"/>
           </Group>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="132" max="32767" attributes="0"/>
+                  <Component id="jPasswordField1" min="-2" pref="33" max="-2" attributes="0"/>
+                  <EmptySpace pref="121" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+
       </Group>
     </DimensionLayout>
   </Layout>
@@ -99,23 +116,30 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
-      </Events>
-    </Component>
+
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Login"/>
+        <Property name="focusable" type="boolean" value="false"/>
+
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+
+    <Component class="javax.swing.JLabel" name="ClickToSignIn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Click here to sign up"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ClickToSignInMouseClicked"/>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ClickToSignInMouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ClickToSignInMouseExited"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+
     </Component>
   </SubComponents>
 </Form>
