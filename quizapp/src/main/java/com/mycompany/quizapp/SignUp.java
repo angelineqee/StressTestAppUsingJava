@@ -4,6 +4,7 @@
  */
 package com.mycompany.quizapp;
 
+
 import java.awt.Cursor;
 import java.sql.SQLException; 
 import java.sql.Connection;
@@ -14,11 +15,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author Angeline
  */
 public class SignUp extends javax.swing.JFrame {
+
     static Connection conn = null;
     static PreparedStatement pst = null;
     
@@ -46,6 +49,7 @@ public class SignUp extends javax.swing.JFrame {
          return checkUser;
     }
     
+
     /**
      * Creates new form SignUp
      */
@@ -71,6 +75,7 @@ public class SignUp extends javax.swing.JFrame {
         FirstName = new javax.swing.JTextField();
         LastName = new javax.swing.JTextField();
         Username = new javax.swing.JTextField();
+
         ReenterLabel = new javax.swing.JLabel();
         SignUp = new javax.swing.JButton();
         loginDirect = new javax.swing.JLabel();
@@ -78,6 +83,7 @@ public class SignUp extends javax.swing.JFrame {
         ReenterPsw = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel1.setText("Sign Up");
@@ -90,11 +96,13 @@ public class SignUp extends javax.swing.JFrame {
 
         PasswordLabel.setText("Password:");
 
+
         FirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FirstNameActionPerformed(evt);
             }
         });
+
 
         ReenterLabel.setText("Re-enter password:");
 
@@ -120,11 +128,13 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(202, 202, 202)
@@ -156,10 +166,12 @@ public class SignUp extends javax.swing.JFrame {
                     .addContainerGap(282, Short.MAX_VALUE)
                     .addComponent(ReenterPsw, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(167, Short.MAX_VALUE)))
+
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(FirstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,12 +202,14 @@ public class SignUp extends javax.swing.JFrame {
                     .addContainerGap(217, Short.MAX_VALUE)
                     .addComponent(ReenterPsw, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(143, Short.MAX_VALUE)))
+
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+
             .addGroup(layout.createSequentialGroup()
                 .addGap(367, 367, 367)
                 .addComponent(jLabel1)
@@ -210,6 +224,7 @@ public class SignUp extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(155, Short.MAX_VALUE))
+
         );
 
         pack();
@@ -218,6 +233,7 @@ public class SignUp extends javax.swing.JFrame {
     private void FirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirstNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FirstNameActionPerformed
+
 
     private void SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpActionPerformed
         String fname = FirstName.getText();
@@ -314,15 +330,19 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel FirstNameLabel;
     private javax.swing.JTextField LastName;
     private javax.swing.JLabel LastNameLabel;
+
     private javax.swing.JPasswordField Password;
     private javax.swing.JLabel PasswordLabel;
     private javax.swing.JLabel ReenterLabel;
     private javax.swing.JPasswordField ReenterPsw;
     private javax.swing.JButton SignUp;
+
     private javax.swing.JTextField Username;
     private javax.swing.JLabel UsernameLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+
     private javax.swing.JLabel loginDirect;
+
     // End of variables declaration//GEN-END:variables
 }
