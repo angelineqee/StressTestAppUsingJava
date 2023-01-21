@@ -68,6 +68,7 @@ public class Result extends javax.swing.JFrame {
         TestName = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         TestName1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         WarmMessage = new javax.swing.JTextPane();
@@ -75,6 +76,7 @@ public class Result extends javax.swing.JFrame {
         StressLevel1 = new javax.swing.JLabel();
         Username = new javax.swing.JLabel();
         MessagePSS = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         TestName.setFont(new java.awt.Font("Bahnschrift", 1, 36)); // NOI18N
         TestName.setText("Mind Your Mind");
@@ -89,12 +91,16 @@ public class Result extends javax.swing.JFrame {
         TestName1.setForeground(new java.awt.Color(47, 47, 79));
         TestName1.setText("Mind Your Mind");
 
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(449, Short.MAX_VALUE)
+                .addContainerGap(406, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TestName1)
                 .addGap(22, 22, 22))
         );
@@ -102,7 +108,9 @@ public class Result extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(TestName1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TestName1)
+                    .addComponent(jLabel2))
                 .addGap(16, 16, 16))
         );
 
@@ -110,7 +118,10 @@ public class Result extends javax.swing.JFrame {
 
         WarmMessage.setEditable(false);
         WarmMessage.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        WarmMessage.setText("Message");
+        WarmMessage.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
+        WarmMessage.setForeground(new java.awt.Color(47, 47, 79));
+        WarmMessage.setText("A message to you:");
+        WarmMessage.setInheritsPopupMenu(true);
         jScrollPane2.setViewportView(WarmMessage);
 
         Score.setFont(new java.awt.Font("Bahnschrift", 1, 16)); // NOI18N
@@ -141,7 +152,7 @@ public class Result extends javax.swing.JFrame {
                 .addComponent(Score)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(StressLevel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67))
         );
@@ -151,6 +162,8 @@ public class Result extends javax.swing.JFrame {
 
         MessagePSS.setFont(new java.awt.Font("Bahnschrift", 0, 8)); // NOI18N
         MessagePSS.setText("This test uses the Perceived Stress Scale (PSS)");
+
+        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,6 +178,10 @@ public class Result extends javax.swing.JFrame {
                         .addGap(270, 270, 270)
                         .addComponent(MessagePSS)))
                 .addContainerGap(278, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(261, 261, 261))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +193,8 @@ public class Result extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(111, 111, 111)
+                .addComponent(jLabel1)
+                .addGap(95, 95, 95)
                 .addComponent(Username)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
                 .addComponent(MessagePSS)
@@ -187,9 +205,9 @@ public class Result extends javax.swing.JFrame {
                     .addGap(0, 465, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(71, Short.MAX_VALUE)
+                    .addContainerGap(76, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(46, Short.MAX_VALUE)))
+                    .addContainerGap(53, Short.MAX_VALUE)))
         );
 
         pack();
@@ -238,6 +256,8 @@ public class Result extends javax.swing.JFrame {
     private javax.swing.JLabel TestName1;
     private javax.swing.JLabel Username;
     private static javax.swing.JTextPane WarmMessage;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
