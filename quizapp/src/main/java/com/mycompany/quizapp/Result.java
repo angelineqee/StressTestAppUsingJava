@@ -34,7 +34,7 @@ public class Result extends javax.swing.JFrame {
     }
     
     public static void displayMessages(int score){
-        Random ran = new Random();
+        Random ran = new Random(System.currentTimeMillis());
         int y = ran.nextInt(3);
         if( score >= 27) {
             WarmMessage.setText(high[y]);
@@ -323,16 +323,16 @@ public class Result extends javax.swing.JFrame {
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         StartQuizPage start = new StartQuizPage();
-        start.setVisible(b:true);
-        this.setVisible(b:false);
+        start.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BackActionPerformed
 
     private void BackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseEntered
-        Back.setCursor(new Cursor(type:Cursor.HAND_CURSOR));
+        Back.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_BackMouseEntered
 
     private void BackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseExited
-        Back.setCursor(new Cursor(type:Cursor.DEFAULT_CURSOR));
+        Back.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_BackMouseExited
 
     /**

@@ -327,16 +327,15 @@ public class StartQuizPage extends javax.swing.JFrame {
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
         Questions question = new Questions();
         question.setVisible(true);
-        Result.setUsername(EnterName.getText());
         this.setVisible(false);
     }//GEN-LAST:event_StartButtonActionPerformed
 
     private void StartButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StartButtonMouseEntered
-        StartButton.setCursor(new Cursor(type:Cursor.HAND_CURSOR));
+        StartButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_StartButtonMouseEntered
 
     private void StartButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StartButtonMouseExited
-        StartButton.setCursor(new Cursor(type:Cursor.DEFAULT_CURSOR));
+        StartButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_StartButtonMouseExited
 
     /**
