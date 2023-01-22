@@ -6,7 +6,6 @@ package com.mycompany.quizapp;
 
 import java.awt.Cursor;
 import static java.lang.String.valueOf;
-import java.sql.DriverManager;
 import java.util.Random;
 import static com.mycompany.quizapp.SignUp.conn;
 import static com.mycompany.quizapp.SignUp.pst;
@@ -29,10 +28,8 @@ public class Result extends javax.swing.JFrame {
     static String moderate[] = {moderate1, moderate2, moderate3};
     static String low[] = {low1, low2, low3};
     
-    
-    
-    public static void getUsername(String Username){
-        username = Username;
+    public static void setUsername(String name){
+        username=name;
     }
     
     public static void setScore(int score){

@@ -4,7 +4,6 @@
  */
 package com.mycompany.quizapp;
 
-
 import java.awt.Cursor;
 import java.sql.SQLException; 
 import java.sql.Connection;
@@ -62,7 +61,7 @@ public class SignUp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         FirstNameLabel = new javax.swing.JLabel();
         LastNameLabel = new javax.swing.JLabel();
@@ -80,9 +79,11 @@ public class SignUp extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
-        jLabel1.setText("Sign Up");
+        jPanel2.setBackground(new java.awt.Color(222, 228, 228));
 
+        jPanel1.setBackground(new java.awt.Color(185, 198, 204));
+
+        FirstNameLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         FirstNameLabel.setText("First name:");
 
         LastNameLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
@@ -91,8 +92,10 @@ public class SignUp extends javax.swing.JFrame {
         UsernameLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         UsernameLabel.setText("Last name:");
 
+        PasswordLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         PasswordLabel.setText("Password:");
 
+        FirstName.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         FirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FirstNameActionPerformed(evt);
@@ -102,7 +105,7 @@ public class SignUp extends javax.swing.JFrame {
         Username.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SignUpActionPerformed(evt);
+                UsernameActionPerformed(evt);
             }
         });
 
@@ -111,7 +114,31 @@ public class SignUp extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LastNameActionPerformed(evt);
             }
-            
+        });
+
+        jLabel2.setFont(new java.awt.Font("Berlin Sans FB", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Create an account");
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        SignUpButton.setBackground(new java.awt.Color(222, 215, 255));
+        SignUpButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
+        SignUpButton.setForeground(new java.awt.Color(102, 102, 102));
+        SignUpButton.setText("Sign Up");
+        SignUpButton.setToolTipText("");
+        SignUpButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SignUpButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SignUpButtonMouseExited(evt);
+            }
+        });
+        SignUpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SignUpButtonActionPerformed(evt);
+            }
         });
 
         ReenterPswLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
@@ -128,29 +155,6 @@ public class SignUp extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 ClickToLoginMouseExited(evt);
-            }
-        });
-
-        Password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasswordActionPerformed(evt);
-            }
-        });
-
-        ReenterPswLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        ReenterPswLabel.setText("Re-enter Password:");
-
-        ClickToLogin.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        ClickToLogin.setText("Click here to login");
-        ClickToLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ClickToLoginMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-            ClickToLoginMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-            ClickToLoginMouseExited(evt);
             }
         });
 
@@ -249,11 +253,10 @@ public class SignUp extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(367, 367, 367)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,9 +322,10 @@ public class SignUp extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SignUpButtonActionPerformed
 
-    private void SignUpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpMouseEntered
-        SignUp.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_SignUpMouseEntered
+    private void SignUpButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpButtonMouseEntered
+        // TODO add your handling code here:
+        SignUpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_SignUpButtonMouseEntered
 
     private void SignUpButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpButtonMouseExited
         // TODO add your handling code here:
@@ -393,8 +397,8 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JButton SignUpButton;
     private javax.swing.JTextField Username;
     private javax.swing.JLabel UsernameLabel;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel loginDirect;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

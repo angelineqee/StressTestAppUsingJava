@@ -381,42 +381,6 @@ public class StartQuizPage extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_StartButtonActionPerformed
 
-    private void DisplayRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayRecordsActionPerformed
-        try{
-            Stress_Tracker stress_Tracker = new Stress_Tracker();
-            String query = "SELECT RECORD_DATE, STRESS_SCORE, STRESS_LEVEL FROM stress_records WHERE USER_ID = (SELECT USER_ID FROM users WHERE users.USERNAME = ?);";
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/cat201","root","pass123");
-            PreparedStatement pst = conn.prepareStatement(query);
-            pst.setString(1, username);
-            ResultSet rs = pst.executeQuery();
-            ResultSetMetaData rsmd = rs.getMetaData();
-           
-            while(rs.next()){
-                //data will be added until finish
-                Date date = rs.getDate("RECORD_dATE");
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String strDate = dateFormat.format(date);
-                String stress_score = String.valueOf(rs.getInt("STRESS_SCORE"));
-                String stress_level = rs.getString("STRESS_LEVEL");
-                
-                String tbData[] = {strDate, stress_score, stress_level};
-                DefaultTableModel tblModel = (DefaultTableModel)Stress_Tracker.RecordsTable.getModel();
-                
-                //add string array into JTable
-                tblModel.addRow(tbData);
-            }
-            stress_Tracker.setVisible(true);
-            this.setVisible(false);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(StartQuizPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_DisplayRecordsActionPerformed
-
-    private void DisplayRecordsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DisplayRecordsMouseEntered
-        
-    }//GEN-LAST:event_DisplayRecordsMouseEntered
-
     /**
      * @param args the command line arguments
      */

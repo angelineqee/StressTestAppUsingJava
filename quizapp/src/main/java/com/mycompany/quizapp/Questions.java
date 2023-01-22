@@ -429,14 +429,12 @@ public class Questions extends javax.swing.JFrame {
                 totalScore = totalScore + questionScore;
                 Result result = new Result();
                 result.setScore(totalScore);
-                result.addRecord(totalScore);
                 this.setVisible(false);
                 result.setVisible(true);
             }
         } else{
             int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to end the test?", "End the test",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
             if(result == JOptionPane.YES_OPTION){
-                index=0;
                 StartQuizPage startQuiz = new StartQuizPage();
                 startQuiz.setVisible(true);
                 this.setVisible(false);
