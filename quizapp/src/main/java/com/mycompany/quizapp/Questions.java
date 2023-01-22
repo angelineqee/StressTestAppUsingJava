@@ -277,16 +277,15 @@ public class Questions extends javax.swing.JFrame {
         if((Option1.isSelected()||Option2.isSelected()||Option3.isSelected()||Option4.isSelected()||Option5.isSelected())==false){
             showMessageDialog(null, "Please choose an option.");
         }
-        else if(!Question_txt.getText().equals(q10)){
+        else{
             totalScore = totalScore+questionScore;
             index++;
             buttonGroup1.clearSelection(); 
             Question_txt.setText(questionArr[index]);
-        }else
-        {
-            Next.setEnabled(false);
-            buttonGroup1.clearSelection();
-        } 
+            if(Question_txt.getText().equals(q10)){
+                Next.setEnabled(false);
+            }
+        }
     }//GEN-LAST:event_NextActionPerformed
 
     private void Option1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Option1ActionPerformed
@@ -326,6 +325,7 @@ public class Questions extends javax.swing.JFrame {
         } else{
             int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to end the test?", "End the test",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
             if(result == JOptionPane.YES_OPTION){
+                index=0;
                 StartQuizPage startQuiz = new StartQuizPage();
                 startQuiz.setVisible(true);
                 this.setVisible(false);
