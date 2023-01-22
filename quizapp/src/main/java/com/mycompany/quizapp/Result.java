@@ -26,7 +26,7 @@ public class Result extends javax.swing.JFrame {
     static String high[] = {high1, high2, high3};
     static String moderate[] = {moderate1, moderate2, moderate3};
     static String low[] = {low1, low2, low3};
-    static Random ran = new Random();
+    
     
     
     public static void getUsername(String Username){
@@ -39,6 +39,7 @@ public class Result extends javax.swing.JFrame {
     }
     
     public static void displayMessages(int score){
+        Random ran = new Random(System.currentTimeMillis());
         int y = ran.nextInt(3);
         if( score >= 27) {
             WarmMessage.setText(high[y]);
@@ -80,6 +81,7 @@ public class Result extends javax.swing.JFrame {
     public Result() {
         initComponents();
         Username.setText("Hi, " + username);
+        
     }
     
 
