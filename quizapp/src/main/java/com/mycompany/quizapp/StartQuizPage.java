@@ -46,6 +46,7 @@ public class StartQuizPage extends javax.swing.JFrame {
             .addGap(0, 33, Short.MAX_VALUE)
         );
 
+        jPanel2.setBackground(new java.awt.Color(176, 224, 230));
         jPanel2.setToolTipText("");
 
         TestName.setFont(new java.awt.Font("Bahnschrift", 1, 36)); // NOI18N
@@ -79,6 +80,8 @@ public class StartQuizPage extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
         );
+
+        jPanel4.setBackground(new java.awt.Color(224, 255, 255));
 
         StartButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         StartButton.setText("Start");
