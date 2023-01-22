@@ -7,6 +7,7 @@ package com.mycompany.quizapp;
 public class Quizapp {
 
     public static void main(String[] args) {
-        new StartQuizPage();
+        new Login().setVisible(true);
+
     }
 }
