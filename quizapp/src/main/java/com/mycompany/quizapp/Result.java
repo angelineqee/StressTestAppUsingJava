@@ -35,6 +35,7 @@ public class Result extends javax.swing.JFrame {
     public static void setScore(int score){
         Score.setText(valueOf(score));
         displayMessages(score);
+        addRecord(score);
     }
     
     public static void displayMessages(int score){
@@ -52,7 +53,6 @@ public class Result extends javax.swing.JFrame {
         }
     }
     public static void addRecord (int score){
-
         try {
                 String query = "INSERT INTO stress_records(RECORD_DATE,STRESS_SCORE,STRESS_LEVEL, USER_ID) VALUES (?,?,?,(SELECT USER_ID FROM users WHERE users.USERNAME = ?))";
                 conn = DriverManager.getConnection("jdbc:mysql://localhost/cat201","root","pass123");
@@ -78,6 +78,7 @@ public class Result extends javax.swing.JFrame {
     public Result() {
         initComponents();
         Username.setText("Hi, " + username);
+        
     }
     
 
