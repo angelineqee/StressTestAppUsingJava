@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.quizapp;
+import java.awt.Cursor;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -55,39 +56,40 @@ public class Login extends javax.swing.JFrame {
         setBackground(new java.awt.Color(204, 204, 204));
         setPreferredSize(new java.awt.Dimension(576, 320));
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel2.setBackground(new java.awt.Color(185, 198, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         AppNameLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
-        AppNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        AppNameLabel.setForeground(new java.awt.Color(51, 51, 51));
         AppNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AppNameLabel.setText("~M i n d   Y o u r   M i n d~");
         jPanel2.add(AppNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 12, 322, -1));
 
         AppTaglineLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        AppTaglineLabel.setForeground(new java.awt.Color(255, 255, 255));
+        AppTaglineLabel.setForeground(new java.awt.Color(51, 51, 51));
         AppTaglineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AppTaglineLabel.setText("Measure your stress, manage your well-being");
         AppTaglineLabel.setAlignmentY(0.0F);
         jPanel2.add(AppTaglineLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 318, 322, -1));
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(222, 228, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        LoginTitleLabel.setBackground(new java.awt.Color(51, 51, 51));
         LoginTitleLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
-        LoginTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        LoginTitleLabel.setForeground(new java.awt.Color(51, 51, 51));
         LoginTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LoginTitleLabel.setText("Log in");
         LoginTitleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel1.add(LoginTitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 6, 68, 35));
 
         LogInUsernameLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        LogInUsernameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        LogInUsernameLabel.setForeground(new java.awt.Color(102, 102, 102));
         LogInUsernameLabel.setText("Username:");
         jPanel1.add(LogInUsernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 47, -1, -1));
 
         LogInPasswordLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        LogInPasswordLabel.setForeground(new java.awt.Color(255, 255, 255));
+        LogInPasswordLabel.setForeground(new java.awt.Color(102, 102, 102));
         LogInPasswordLabel.setText("Password:");
         jPanel1.add(LogInPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 119, -1, -1));
 
@@ -113,6 +115,14 @@ public class Login extends javax.swing.JFrame {
         LoginButton.setBorderPainted(false);
         LoginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LoginButton.setOpaque(true);
+        LoginButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LoginButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                LoginButtonMouseExited(evt);
+            }
+        });
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoginButtonActionPerformed(evt);
@@ -121,7 +131,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(LoginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 199, 254, 31));
 
         SignUpLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        SignUpLabel.setForeground(new java.awt.Color(255, 255, 255));
+        SignUpLabel.setForeground(new java.awt.Color(51, 51, 51));
         SignUpLabel.setText("Click here to sign up");
         jPanel1.add(SignUpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 236, -1, 24));
 
@@ -152,6 +162,16 @@ public class Login extends javax.swing.JFrame {
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_LoginButtonActionPerformed
+
+    private void LoginButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginButtonMouseEntered
+        // TODO add your handling code here:
+        LoginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_LoginButtonMouseEntered
+
+    private void LoginButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginButtonMouseExited
+        // TODO add your handling code here:
+        LoginButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_LoginButtonMouseExited
 
     /**
      * @param args the command line arguments
