@@ -4,8 +4,12 @@
  */
 package com.mycompany.quizapp;
 
+import static com.mycompany.quizapp.SignUp.conn;
+import static com.mycompany.quizapp.SignUp.pst;
 import static java.lang.String.valueOf;
+import java.sql.DriverManager;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 public class Result extends javax.swing.JFrame {
     static String username = "";
@@ -22,9 +26,11 @@ public class Result extends javax.swing.JFrame {
     static String high[] = {high1, high2, high3};
     static String moderate[] = {moderate1, moderate2, moderate3};
     static String low[] = {low1, low2, low3};
+    static Random ran = new Random();
     
-    public static void setUsername(String name){
-        username=name;
+    
+    public static void getUsername(String Username){
+        username = Username;
     }
     
     public static void setScore(int score){
@@ -33,7 +39,6 @@ public class Result extends javax.swing.JFrame {
     }
     
     public static void displayMessages(int score){
-        Random ran = new Random();
         int y = ran.nextInt(3);
         if( score >= 27) {
             WarmMessage.setText(high[y]);
@@ -45,6 +50,28 @@ public class Result extends javax.swing.JFrame {
             WarmMessage.setText(low[y]);
             StressLevel.setText("Stress Level: Low");
         }
+    }
+    
+    
+    public static void addRecord (int score){
+        //test, to be removed later
+        System.out.println(username);
+        try {
+                String query = "INSERT INTO stress_records(RECORD_DATE,STRESS_SCORE,STRESS_LEVEL, USER_ID) VALUES (?,?,?,(SELECT USER_ID FROM users WHERE users.USERNAME = ?))";
+                conn = DriverManager.getConnection("jdbc:mysql://localhost/cat201","root","pass123");
+                java.sql.Date sqlDate = new java.sql.Date(new java.util.Date().getTime());
+         
+                pst = conn.prepareStatement(query);
+                pst.setDate(1, sqlDate);
+                pst.setInt(2, score);
+                pst.setString(3,StressLevel.getText() );
+                pst.setString(4, username);
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Score added to stress_tracker");
+            }
+            catch(Exception ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
     }
     
     /**
@@ -168,37 +195,37 @@ public class Result extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Result.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Result.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Result.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Result.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Result().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Result.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Result.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Result.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Result.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Result().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JLabel Score;

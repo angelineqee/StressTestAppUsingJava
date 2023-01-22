@@ -3,11 +3,6 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[800, 624]"/>
-    </Property>
-
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -28,26 +23,22 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="367" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="45" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="155" max="32767" attributes="0"/>
-
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,7 +58,6 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
@@ -108,7 +98,6 @@
                       <EmptySpace pref="282" max="32767" attributes="0"/>
                       <Component id="ReenterPsw" min="-2" pref="351" max="-2" attributes="0"/>
                       <EmptySpace pref="167" max="32767" attributes="0"/>
-
                   </Group>
               </Group>
           </Group>
@@ -116,7 +105,6 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="FirstNameLabel" min="-2" pref="43" max="-2" attributes="0"/>
@@ -153,7 +141,6 @@
                       <EmptySpace pref="217" max="32767" attributes="0"/>
                       <Component id="ReenterPsw" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace pref="143" max="32767" attributes="0"/>
-
                   </Group>
               </Group>
           </Group>
@@ -181,14 +168,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="FirstName">
-
-
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FirstNameActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="LastName">
-
         </Component>
         <Component class="javax.swing.JTextField" name="Username">
         </Component>
@@ -203,6 +187,8 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SignUpMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SignUpMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SignUpActionPerformed"/>
           </Events>
         </Component>
@@ -220,7 +206,6 @@
         <Component class="javax.swing.JPasswordField" name="Password">
         </Component>
         <Component class="javax.swing.JPasswordField" name="ReenterPsw">
-
         </Component>
       </SubComponents>
     </Container>
