@@ -4,15 +4,15 @@
  */
 package com.mycompany.quizapp;
 import java.awt.Cursor;
-import javax.swing.JPanel;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GradientPaint;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.RoundRectangle2D;
+import java.awt.Cursor;
+import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,9 +46,9 @@ public class Login extends javax.swing.JFrame {
         LogInUsernameLabel = new javax.swing.JLabel();
         LogInPasswordLabel = new javax.swing.JLabel();
         UsernameTextField = new javax.swing.JTextField();
-        PasswordTextField = new javax.swing.JTextField();
         LoginButton = new javax.swing.JButton();
         SignUpLabel = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -103,13 +103,6 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(UsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 67, 254, 34));
 
-        PasswordTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasswordTextFieldActionPerformed(evt);
-            }
-        });
-        jPanel1.add(PasswordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 139, 254, 34));
-
         LoginButton.setBackground(new java.awt.Color(125, 152, 161));
         LoginButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
         LoginButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -135,7 +128,31 @@ public class Login extends javax.swing.JFrame {
         SignUpLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         SignUpLabel.setForeground(new java.awt.Color(51, 51, 51));
         SignUpLabel.setText("Click here to sign up");
+        SignUpLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SignUpLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SignUpLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SignUpLabelMouseExited(evt);
+            }
+        });
         jPanel1.add(SignUpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 236, -1, 24));
+
+        jPasswordField1.setPreferredSize(new java.awt.Dimension(64, 22));
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyPressed(evt);
+            }
+        });
+        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 260, 30));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 320, -1));
 
@@ -157,12 +174,37 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_UsernameTextFieldActionPerformed
 
-    private void PasswordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordTextFieldActionPerformed
-
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
-        // TODO add your handling code here:
+        PreparedStatement ps;
+        ResultSet rs;
+        String uname = UsernameTextField.getText();
+        String pass = String.valueOf(jPasswordField1.getPassword());
+        
+        String query = "SELECT * FROM `users` WHERE `USERNAME` =? AND `USER_PSW` =?";
+        
+        try {
+            ps = DriverManager.getConnection("jdbc:mysql://localhost/cat201","root","pass123").prepareStatement(query);
+            
+            ps.setString(1, uname);
+            ps.setString(2, pass);
+            
+            rs = ps.executeQuery();
+            
+            if(rs.next())
+            {
+                new StartQuizPage().setVisible(true);
+                this.setVisible(false);
+                StartQuizPage.getUsername(uname);
+                Result.setUsername(uname);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Incorrect Username Or Password", "Login Failed", 2);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void LoginButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginButtonMouseEntered
@@ -174,6 +216,58 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         LoginButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_LoginButtonMouseExited
+
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void SignUpLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpLabelMouseClicked
+        new SignUp().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_SignUpLabelMouseClicked
+
+    private void SignUpLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpLabelMouseEntered
+        SignUpLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_SignUpLabelMouseEntered
+
+    private void SignUpLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpLabelMouseExited
+        SignUpLabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_SignUpLabelMouseExited
+
+    private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            PreparedStatement ps;
+            ResultSet rs;
+            String uname = UsernameTextField.getText();
+            String pass = String.valueOf(jPasswordField1.getPassword());
+
+            String query = "SELECT * FROM `users` WHERE `USERNAME` =? AND `USER_PSW` =?";
+
+            try {
+                ps = DriverManager.getConnection("jdbc:mysql://localhost/cat201","root","pass123").prepareStatement(query);
+
+                ps.setString(1, uname);
+                ps.setString(2, pass);
+
+                rs = ps.executeQuery();
+
+                if(rs.next())
+                {
+                    new StartQuizPage().setVisible(true);
+                    this.setVisible(false);
+                    StartQuizPage.getUsername(uname);
+                    Result.setUsername(uname);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Incorrect Username Or Password", "Login Failed", 2);
+                }
+
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jPasswordField1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -218,11 +312,11 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel LogInUsernameLabel;
     private javax.swing.JButton LoginButton;
     private javax.swing.JLabel LoginTitleLabel;
-    private javax.swing.JTextField PasswordTextField;
     private javax.swing.JLabel SignUpLabel;
     private javax.swing.JTextField UsernameTextField;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPasswordField jPasswordField1;
     // End of variables declaration//GEN-END:variables
 }

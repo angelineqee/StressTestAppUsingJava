@@ -4,10 +4,30 @@
  */
 package com.mycompany.quizapp;
 
+import static com.mycompany.quizapp.Result.username;
+import static com.mycompany.quizapp.SignUp.conn;
+import static com.mycompany.quizapp.SignUp.pst;
 import java.awt.Cursor;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class StartQuizPage extends javax.swing.JFrame {
-
+    static String username = "";
+    public static void getUsername(String Username){
+        username = Username;
+    }
     /**
      * Creates new form StartQuizPage
      */
@@ -31,19 +51,17 @@ public class StartQuizPage extends javax.swing.JFrame {
         Desc = new javax.swing.JTextPane();
         Logo1 = new javax.swing.JLabel();
         Start = new javax.swing.JPanel();
-        StartButton = new javax.swing.JButton();
+        ViewRecords = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
-        Username1 = new javax.swing.JLabel();
+        StartButton = new javax.swing.JButton();
         AppName = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         Footer1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         Copyright1 = new javax.swing.JLabel();
-        Flower = new javax.swing.JLabel();
         MiniFlower = new javax.swing.JLabel();
         Username = new javax.swing.JLabel();
-        Flower1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
         Username2 = new javax.swing.JLabel();
@@ -80,7 +98,6 @@ public class StartQuizPage extends javax.swing.JFrame {
         Desc.setOpaque(false);
         jScrollPane2.setViewportView(Desc);
 
-        Logo1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel\\Downloads\\Untitled design (5).png")); // NOI18N
         Logo1.setToolTipText("");
 
         javax.swing.GroupLayout TitleLayout = new javax.swing.GroupLayout(Title);
@@ -116,6 +133,31 @@ public class StartQuizPage extends javax.swing.JFrame {
 
         Start.setBackground(new java.awt.Color(222, 228, 228));
 
+        ViewRecords.setBackground(new java.awt.Color(245, 247, 244));
+        ViewRecords.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        ViewRecords.setText("View Records");
+        ViewRecords.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ViewRecordsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ViewRecordsMouseExited(evt);
+            }
+        });
+        ViewRecords.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewRecordsActionPerformed(evt);
+            }
+        });
+
+        jTextPane1.setEditable(false);
+        jTextPane1.setBackground(new java.awt.Color(245, 247, 244));
+        jTextPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "How does this Stress Test works?", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        jTextPane1.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
+        jTextPane1.setText("The Perceived Stress Scale (PSS) is a classic stress assessment instrument. The questions in this scale ask about your feelings and thoughts during the last month. In each case, you will be asked to indicate how often you felt or thought a certain way. Don’t try to count up the number of times you felt a particular way; rather indicate the alternative that seems like a reasonable estimate.");
+        jTextPane1.setOpaque(false);
+        jScrollPane1.setViewportView(jTextPane1);
+
         StartButton.setBackground(new java.awt.Color(245, 247, 244));
         StartButton.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
         StartButton.setText("Start");
@@ -133,42 +175,28 @@ public class StartQuizPage extends javax.swing.JFrame {
             }
         });
 
-        jTextPane1.setEditable(false);
-        jTextPane1.setBackground(new java.awt.Color(245, 247, 244));
-        jTextPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "How does this Stress Test works?", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
-        jTextPane1.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        jTextPane1.setText("The Perceived Stress Scale (PSS) is a classic stress assessment instrument. The questions in this scale ask about your feelings and thoughts during the last month. In each case, you will be asked to indicate how often you felt or thought a certain way. Don’t try to count up the number of times you felt a particular way; rather indicate the alternative that seems like a reasonable estimate.");
-        jTextPane1.setOpaque(false);
-        jScrollPane1.setViewportView(jTextPane1);
-
-        Username1.setFont(new java.awt.Font("Bahnschrift", 1, 20)); // NOI18N
-        Username1.setText("Username");
-
         javax.swing.GroupLayout StartLayout = new javax.swing.GroupLayout(Start);
         Start.setLayout(StartLayout);
         StartLayout.setHorizontalGroup(
             StartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StartLayout.createSequentialGroup()
+                .addContainerGap(111, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(115, 115, 115))
             .addGroup(StartLayout.createSequentialGroup()
                 .addGap(310, 310, 310)
-                .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 310, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StartLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(StartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StartLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(115, 115, 115))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StartLayout.createSequentialGroup()
-                        .addComponent(Username1)
-                        .addGap(336, 336, 336))))
+                    .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ViewRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         StartLayout.setVerticalGroup(
             StartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(StartLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(Username1)
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ViewRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
@@ -176,8 +204,6 @@ public class StartQuizPage extends javax.swing.JFrame {
 
         AppName.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         AppName.setText("Mind Your Mind");
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel\\Downloads\\#B9C6CC (3).png")); // NOI18N
 
         Footer1.setBackground(new java.awt.Color(222, 228, 228));
 
@@ -202,17 +228,9 @@ public class StartQuizPage extends javax.swing.JFrame {
                 .addComponent(Copyright1))
         );
 
-        Flower.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel\\Downloads\\Untitled design (4).png")); // NOI18N
-        Flower.setText("jLabel3");
-
-        MiniFlower.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel\\Downloads\\#B9C6CC (2).png")); // NOI18N
-
         Username.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         Username.setForeground(new java.awt.Color(47, 47, 79));
         Username.setText("About Us");
-
-        Flower1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel\\Downloads\\Untitled design (4).png")); // NOI18N
-        Flower1.setText("jLabel3");
 
         jTextPane2.setEditable(false);
         jTextPane2.setBackground(new java.awt.Color(222, 228, 228));
@@ -239,9 +257,7 @@ public class StartQuizPage extends javax.swing.JFrame {
         Footer1Layout.setHorizontalGroup(
             Footer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Footer1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Flower1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
+                .addGap(87, 87, 87)
                 .addGroup(Footer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Username)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -251,9 +267,7 @@ public class StartQuizPage extends javax.swing.JFrame {
                 .addGroup(Footer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Username2)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Flower, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(103, Short.MAX_VALUE))
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Footer1Layout.setVerticalGroup(
@@ -262,28 +276,19 @@ public class StartQuizPage extends javax.swing.JFrame {
                 .addGroup(Footer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Footer1Layout.createSequentialGroup()
                         .addGap(0, 16, Short.MAX_VALUE)
-                        .addGroup(Footer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Footer1Layout.createSequentialGroup()
-                                .addComponent(Flower1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(7, 7, 7))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Footer1Layout.createSequentialGroup()
-                                .addGroup(Footer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(Footer1Layout.createSequentialGroup()
-                                        .addComponent(Username2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(Footer1Layout.createSequentialGroup()
-                                        .addComponent(Username)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(12, 12, 12))))
-                    .addGroup(Footer1Layout.createSequentialGroup()
-                        .addGroup(Footer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(MiniFlower)
+                        .addGroup(Footer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(Footer1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(Flower, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(Username2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Footer1Layout.createSequentialGroup()
+                                .addComponent(Username)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12))
+                    .addGroup(Footer1Layout.createSequentialGroup()
+                        .addComponent(MiniFlower)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)))
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -324,19 +329,57 @@ public class StartQuizPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
-        Questions question = new Questions();
-        question.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_StartButtonActionPerformed
+    private void ViewRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewRecordsActionPerformed
+        try {
+            Stress_Tracker stress_Tracker = new Stress_Tracker();
+            String query = "SELECT RECORD_DATE, STRESS_SCORE, STRESS_LEVEL FROM stress_records WHERE USER_ID = (SELECT USER_ID FROM users WHERE users.USERNAME = ?);";
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/cat201","root","pass123");
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, username);
+            ResultSet rs = pst.executeQuery();
+            ResultSetMetaData rsmd = rs.getMetaData();
+            while(rs.next()){
+                //data will be added until finish
+                Date date = rs.getDate("RECORD_dATE");
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String strDate = dateFormat.format(date);
+                String stress_score = String.valueOf(rs.getInt("STRESS_SCORE"));
+                String stress_level = rs.getString("STRESS_LEVEL");
+                
+                String tbData[] = {strDate, stress_score, stress_level};
+                DefaultTableModel tblModel = (DefaultTableModel)Stress_Tracker.jTable1.getModel();
+                
+                //add string array into JTable
+                tblModel.addRow(tbData);
+            }
+            stress_Tracker.setVisible(true);
+            this.setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(StartQuizPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ViewRecordsActionPerformed
+
+    private void ViewRecordsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewRecordsMouseEntered
+        ViewRecords.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_ViewRecordsMouseEntered
+
+    private void ViewRecordsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewRecordsMouseExited
+        ViewRecords.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_ViewRecordsMouseExited
 
     private void StartButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StartButtonMouseEntered
-        StartButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // TODO add your handling code here:
     }//GEN-LAST:event_StartButtonMouseEntered
 
     private void StartButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StartButtonMouseExited
-        StartButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // TODO add your handling code here:
     }//GEN-LAST:event_StartButtonMouseExited
+
+    private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
+         Questions question = new Questions();
+        question.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_StartButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,8 +422,6 @@ public class StartQuizPage extends javax.swing.JFrame {
     private javax.swing.JLabel AppName;
     private javax.swing.JLabel Copyright1;
     private javax.swing.JTextPane Desc;
-    private javax.swing.JLabel Flower;
-    private javax.swing.JLabel Flower1;
     private javax.swing.JPanel Footer1;
     private javax.swing.JPanel Header;
     private javax.swing.JLabel Logo1;
@@ -390,8 +431,8 @@ public class StartQuizPage extends javax.swing.JFrame {
     private javax.swing.JLabel TestName;
     private javax.swing.JPanel Title;
     private javax.swing.JLabel Username;
-    private javax.swing.JLabel Username1;
     private javax.swing.JLabel Username2;
+    private javax.swing.JButton ViewRecords;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;

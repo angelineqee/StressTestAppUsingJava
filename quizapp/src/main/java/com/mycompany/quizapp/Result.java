@@ -7,6 +7,10 @@ package com.mycompany.quizapp;
 import java.awt.Cursor;
 import static java.lang.String.valueOf;
 import java.util.Random;
+import static com.mycompany.quizapp.SignUp.conn;
+import static com.mycompany.quizapp.SignUp.pst;
+import java.sql.DriverManager;
+import javax.swing.JOptionPane;
 
 public class Result extends javax.swing.JFrame {
     static String username = "";
@@ -38,14 +42,33 @@ public class Result extends javax.swing.JFrame {
         int y = ran.nextInt(3);
         if( score >= 27) {
             WarmMessage.setText(high[y]);
-            MessagePSS.setText("Stress Level: High");
+            StressLevel.setText("High");
 	}else if(score >= 14) {
             WarmMessage.setText(moderate[y]);
-            MessagePSS.setText("Stress Level: Moderate");
+            StressLevel.setText("Moderate");
         }else {
             WarmMessage.setText(low[y]);
-            MessagePSS.setText("Stress Level: Low");
+            StressLevel.setText("Low");
         }
+    }
+    public static void addRecord (int score){
+
+        try {
+                String query = "INSERT INTO stress_records(RECORD_DATE,STRESS_SCORE,STRESS_LEVEL, USER_ID) VALUES (?,?,?,(SELECT USER_ID FROM users WHERE users.USERNAME = ?))";
+                conn = DriverManager.getConnection("jdbc:mysql://localhost/cat201","root","pass123");
+                java.sql.Date sqlDate = new java.sql.Date(new java.util.Date().getTime());
+         
+                pst = conn.prepareStatement(query);
+                pst.setDate(1, sqlDate);
+                pst.setInt(2, score);
+                pst.setString(3,StressLevel.getText() );
+                pst.setString(4, username);
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Score added to stress_tracker");
+            }
+            catch(Exception ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
     }
     private boolean b;
     
@@ -73,14 +96,15 @@ public class Result extends javax.swing.JFrame {
         Result = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         WarmMessage = new javax.swing.JTextPane();
-        Score = new javax.swing.JLabel();
-        StressLevel1 = new javax.swing.JLabel();
+        ScoreLabel = new javax.swing.JLabel();
+        StressLevelLabel = new javax.swing.JLabel();
         Username = new javax.swing.JLabel();
         MessagePSS = new javax.swing.JLabel();
+        Score = new javax.swing.JLabel();
+        StressLevel = new javax.swing.JLabel();
         Footer = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         Copyright = new javax.swing.JLabel();
-        Flower = new javax.swing.JLabel();
         Back = new javax.swing.JButton();
         MiniFlower = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -99,7 +123,6 @@ public class Result extends javax.swing.JFrame {
         TestName2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TestName2.setText("Stress Test Result");
 
-        Logo1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel\\Downloads\\Untitled design (5).png")); // NOI18N
         Logo1.setToolTipText("");
 
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
@@ -137,11 +160,11 @@ public class Result extends javax.swing.JFrame {
         WarmMessage.setSelectionColor(new java.awt.Color(185, 198, 204));
         jScrollPane2.setViewportView(WarmMessage);
 
-        Score.setFont(new java.awt.Font("Bahnschrift", 1, 16)); // NOI18N
-        Score.setText("Your Score:");
+        ScoreLabel.setFont(new java.awt.Font("Bahnschrift", 1, 16)); // NOI18N
+        ScoreLabel.setText("Your Score:");
 
-        StressLevel1.setFont(new java.awt.Font("Bahnschrift", 1, 16)); // NOI18N
-        StressLevel1.setText("Your Stress Level:");
+        StressLevelLabel.setFont(new java.awt.Font("Bahnschrift", 1, 16)); // NOI18N
+        StressLevelLabel.setText("Your Stress Level:");
 
         Username.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         Username.setText("Username");
@@ -149,6 +172,12 @@ public class Result extends javax.swing.JFrame {
         MessagePSS.setFont(new java.awt.Font("Bahnschrift", 0, 8)); // NOI18N
         MessagePSS.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         MessagePSS.setText("This test uses the Perceived Stress Scale (PSS)");
+
+        Score.setFont(new java.awt.Font("Bahnschrift", 1, 16)); // NOI18N
+        Score.setText("?");
+
+        StressLevel.setFont(new java.awt.Font("Bahnschrift", 1, 16)); // NOI18N
+        StressLevel.setText("?");
 
         javax.swing.GroupLayout ResultLayout = new javax.swing.GroupLayout(Result);
         Result.setLayout(ResultLayout);
@@ -159,11 +188,13 @@ public class Result extends javax.swing.JFrame {
                     .addGroup(ResultLayout.createSequentialGroup()
                         .addGap(173, 173, 173)
                         .addGroup(ResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ScoreLabel)
+                            .addComponent(StressLevelLabel)
+                            .addComponent(Username))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(ResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Score)
-                            .addComponent(StressLevel1)))
-                    .addGroup(ResultLayout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(Username))
+                            .addComponent(StressLevel)))
                     .addGroup(ResultLayout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -175,12 +206,16 @@ public class Result extends javax.swing.JFrame {
         ResultLayout.setVerticalGroup(
             ResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ResultLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(44, 44, 44)
                 .addComponent(Username)
+                .addGap(18, 18, 18)
+                .addGroup(ResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ScoreLabel)
+                    .addComponent(Score))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Score)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(StressLevel1)
+                .addGroup(ResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(StressLevelLabel)
+                    .addComponent(StressLevel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -209,9 +244,6 @@ public class Result extends javax.swing.JFrame {
                 .addComponent(Copyright))
         );
 
-        Flower.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel\\Downloads\\Untitled design (4).png")); // NOI18N
-        Flower.setText("jLabel3");
-
         Back.setBackground(new java.awt.Color(238, 238, 238));
         Back.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         Back.setText("Back");
@@ -229,16 +261,12 @@ public class Result extends javax.swing.JFrame {
             }
         });
 
-        MiniFlower.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel\\Downloads\\#B9C6CC (2).png")); // NOI18N
-
         javax.swing.GroupLayout FooterLayout = new javax.swing.GroupLayout(Footer);
         Footer.setLayout(FooterLayout);
         FooterLayout.setHorizontalGroup(
             FooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FooterLayout.createSequentialGroup()
-                .addGap(327, 327, 327)
-                .addComponent(Flower, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(392, 392, 392)
                 .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MiniFlower)
@@ -253,9 +281,8 @@ public class Result extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(MiniFlower))
                     .addGroup(FooterLayout.createSequentialGroup()
-                        .addGroup(FooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Flower, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 8, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -275,8 +302,6 @@ public class Result extends javax.swing.JFrame {
         AppName.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         AppName.setText("Mind Your Mind");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Angel\\Downloads\\#B9C6CC (3).png")); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -295,7 +320,7 @@ public class Result extends javax.swing.JFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(Header, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 891, Short.MAX_VALUE))
+                .addComponent(Header, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 894, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,7 +399,6 @@ public class Result extends javax.swing.JFrame {
     private javax.swing.JLabel AppName;
     private javax.swing.JButton Back;
     private javax.swing.JLabel Copyright;
-    private javax.swing.JLabel Flower;
     private javax.swing.JPanel Footer;
     private javax.swing.JPanel Header;
     private javax.swing.JLabel Logo1;
@@ -382,7 +406,9 @@ public class Result extends javax.swing.JFrame {
     private javax.swing.JLabel MiniFlower;
     private javax.swing.JPanel Result;
     private static javax.swing.JLabel Score;
-    private static javax.swing.JLabel StressLevel1;
+    private static javax.swing.JLabel ScoreLabel;
+    private static javax.swing.JLabel StressLevel;
+    private static javax.swing.JLabel StressLevelLabel;
     private javax.swing.JLabel TestName2;
     private javax.swing.JLabel Username;
     private static javax.swing.JTextPane WarmMessage;

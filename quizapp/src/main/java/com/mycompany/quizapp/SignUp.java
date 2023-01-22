@@ -5,13 +5,46 @@
 package com.mycompany.quizapp;
 
 import java.awt.Cursor;
+import java.sql.SQLException; 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Angeline
  */
 public class SignUp extends javax.swing.JFrame {
-
+    static Connection conn = null;
+    static PreparedStatement pst = null;
+    
+    public boolean checkUsername(String username)
+    {
+        PreparedStatement ps;
+        ResultSet rs;
+        boolean checkUser = false;
+        String query = "SELECT * FROM `users` WHERE `USERNAME` =?";
+        
+        try {
+            
+            ps = DriverManager.getConnection("jdbc:mysql://localhost/cat201","root","pass123").prepareStatement(query);
+            ps.setString(1, username);
+            
+            rs = ps.executeQuery();
+            
+            if(rs.next())
+            {
+                checkUser = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return checkUser;
+    }
     /**
      * Creates new form SignUp
      */
@@ -37,12 +70,14 @@ public class SignUp extends javax.swing.JFrame {
         FirstName = new javax.swing.JTextField();
         LastName = new javax.swing.JTextField();
         Username = new javax.swing.JTextField();
-        Password = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         SignUpButton = new javax.swing.JButton();
+        ReenterPswLabel = new javax.swing.JLabel();
+        ClickToLogin = new javax.swing.JLabel();
+        Password = new javax.swing.JPasswordField();
+        ReenterPsw = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 624));
 
         jPanel2.setBackground(new java.awt.Color(222, 228, 228));
 
@@ -52,10 +87,10 @@ public class SignUp extends javax.swing.JFrame {
         FirstNameLabel.setText("First name:");
 
         LastNameLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        LastNameLabel.setText("Last name:");
+        LastNameLabel.setText("Username:");
 
         UsernameLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        UsernameLabel.setText("Username:");
+        UsernameLabel.setText("Last name:");
 
         PasswordLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         PasswordLabel.setText("Password:");
@@ -78,14 +113,6 @@ public class SignUp extends javax.swing.JFrame {
         Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UsernameActionPerformed(evt);
-            }
-        });
-
-        Password.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
-        Password.setToolTipText("");
-        Password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasswordActionPerformed(evt);
             }
         });
 
@@ -114,16 +141,39 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
+        ReenterPswLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
+        ReenterPswLabel.setText("Re-enter Password:");
+
+        ClickToLogin.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
+        ClickToLogin.setText("Click here to login");
+        ClickToLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ClickToLoginMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ClickToLoginMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ClickToLoginMouseExited(evt);
+            }
+        });
+
+        Password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PasswordActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(138, 138, 138)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                 .addGap(138, 138, 138))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -134,13 +184,19 @@ public class SignUp extends javax.swing.JFrame {
                         .addGap(49, 49, 49)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(LastNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LastName)
+                            .addComponent(LastName, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                             .addComponent(PasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ReenterPswLabel)
+                            .addComponent(Password)
+                            .addComponent(ReenterPsw))
                         .addGap(50, 50, 50))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(SignUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(213, 213, 213))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(ClickToLogin))
+                            .addComponent(SignUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(209, 209, 209))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,19 +209,27 @@ public class SignUp extends javax.swing.JFrame {
                     .addComponent(LastNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LastName))
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(UsernameLabel)
-                    .addComponent(PasswordLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Password))
-                .addGap(38, 38, 38)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(FirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(UsernameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(LastName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(PasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Username)
+                    .addComponent(Password, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ReenterPswLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(ReenterPsw, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(SignUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addGap(4, 4, 4)
+                .addComponent(ClickToLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -182,7 +246,7 @@ public class SignUp extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -196,7 +260,9 @@ public class SignUp extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
@@ -210,16 +276,50 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_UsernameActionPerformed
 
-    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordActionPerformed
-
     private void LastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LastNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_LastNameActionPerformed
 
     private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed
-        // TODO add your handling code here:
+        String fname = FirstName.getText();
+        String lname = LastName.getText();
+        String uname = Username.getText();
+        String pass = String.valueOf(Password.getPassword());
+        String re_pass = String.valueOf(ReenterPsw.getPassword());
+        
+        if(uname.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Add A Username");
+        }
+        
+        else if(pass.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Add A Password");
+        }
+        else if(!pass.equals(re_pass))
+        {
+            JOptionPane.showMessageDialog(null, "Retype The Password Again");
+        }
+        else if(checkUsername(uname))
+        {
+            JOptionPane.showMessageDialog(null, "This Username Already Exist");
+        }
+        else{
+            try {
+                String query = "INSERT INTO users(USER_FNAME,USER_LNAME,USERNAME, USER_PSW) VALUES (?,?,?,?)";
+                conn = DriverManager.getConnection("jdbc:mysql://localhost/cat201","root","pass123");
+                pst = conn.prepareStatement(query);
+                pst.setString(1, FirstName.getText());
+                pst.setString(2, LastName.getText());
+                pst.setString(3, Username.getText());
+                pst.setString(4, Password.getText());
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "SIGN UP SUCCESSFULLY");
+            }
+            catch(Exception ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        }
     }//GEN-LAST:event_SignUpButtonActionPerformed
 
     private void SignUpButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpButtonMouseEntered
@@ -231,6 +331,23 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
         SignUpButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_SignUpButtonMouseExited
+
+    private void ClickToLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ClickToLoginMouseClicked
+        new Login().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_ClickToLoginMouseClicked
+
+    private void ClickToLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ClickToLoginMouseEntered
+        ClickToLogin.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_ClickToLoginMouseEntered
+
+    private void ClickToLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ClickToLoginMouseExited
+        ClickToLogin.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_ClickToLoginMouseExited
+
+    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,12 +385,15 @@ public class SignUp extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ClickToLogin;
     private javax.swing.JTextField FirstName;
     private javax.swing.JLabel FirstNameLabel;
     private javax.swing.JTextField LastName;
     private javax.swing.JLabel LastNameLabel;
-    private javax.swing.JTextField Password;
+    private javax.swing.JPasswordField Password;
     private javax.swing.JLabel PasswordLabel;
+    private javax.swing.JPasswordField ReenterPsw;
+    private javax.swing.JLabel ReenterPswLabel;
     private javax.swing.JButton SignUpButton;
     private javax.swing.JTextField Username;
     private javax.swing.JLabel UsernameLabel;
