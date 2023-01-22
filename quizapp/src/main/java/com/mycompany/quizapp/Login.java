@@ -61,7 +61,7 @@ public class Login extends javax.swing.JFrame {
         AppNameLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
         AppNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         AppNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        AppNameLabel.setText("M i n d   Y o u r   M i n d");
+        AppNameLabel.setText("~M i n d   Y o u r   M i n d~");
         jPanel2.add(AppNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 12, 322, -1));
 
         AppTaglineLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
