@@ -4,29 +4,8 @@
  */
 package com.mycompany.quizapp;
 
-import static com.mycompany.quizapp.Result.username;
-import static com.mycompany.quizapp.SignUp.conn;
-import static com.mycompany.quizapp.SignUp.pst;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.SQLSyntaxErrorException;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
 public class StartQuizPage extends javax.swing.JFrame {
-    static String username = "";
-    public static void getUsername(String Username){
-        username = Username;
-    }
+
     /**
      * Creates new form StartQuizPage
      */
@@ -49,10 +28,10 @@ public class StartQuizPage extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         Desc = new javax.swing.JTextPane();
         jPanel4 = new javax.swing.JPanel();
+        EnterName = new javax.swing.JTextField();
         StartButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
-        DisplayRecords = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -100,9 +79,17 @@ public class StartQuizPage extends javax.swing.JFrame {
                 .addGap(6, 6, 6))
         );
 
+        EnterName.setFont(new java.awt.Font("Bahnschrift", 2, 12)); // NOI18N
+        EnterName.setText("Enter your name");
+        EnterName.setRequestFocusEnabled(false);
+        EnterName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnterNameActionPerformed(evt);
+            }
+        });
+
         StartButton.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         StartButton.setText("Start");
-        StartButton.setFocusable(false);
         StartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 StartButtonActionPerformed(evt);
@@ -116,28 +103,14 @@ public class StartQuizPage extends javax.swing.JFrame {
         jTextPane1.setOpaque(false);
         jScrollPane1.setViewportView(jTextPane1);
 
-        DisplayRecords.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        DisplayRecords.setText("Display Records");
-        DisplayRecords.setFocusable(false);
-        DisplayRecords.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                DisplayRecordsMouseEntered(evt);
-            }
-        });
-        DisplayRecords.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DisplayRecordsActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(304, 304, 304)
-                .addComponent(DisplayRecords)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addGap(270, 270, 270)
+                .addComponent(EnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(287, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                     .addContainerGap(316, Short.MAX_VALUE)
@@ -153,8 +126,8 @@ public class StartQuizPage extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addComponent(DisplayRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(267, Short.MAX_VALUE))
+                .addComponent(EnterName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(263, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                     .addContainerGap(95, Short.MAX_VALUE)
@@ -222,88 +195,57 @@ public class StartQuizPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void EnterNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterNameActionPerformed
+
+    }//GEN-LAST:event_EnterNameActionPerformed
+
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
         Questions question = new Questions();
         question.setVisible(true);
+        Result.setUsername(EnterName.getText());
         this.setVisible(false);
     }//GEN-LAST:event_StartButtonActionPerformed
-
-    private void DisplayRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayRecordsActionPerformed
-        try{
-            Stress_Tracker stress_Tracker = new Stress_Tracker();
-            String query = "SELECT RECORD_DATE, STRESS_SCORE, STRESS_LEVEL FROM stress_records WHERE USER_ID = (SELECT USER_ID FROM users WHERE users.USERNAME = ?);";
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/cat201","root","pass123");
-            PreparedStatement pst = conn.prepareStatement(query);
-            pst.setString(1, username);
-            ResultSet rs = pst.executeQuery();
-            ResultSetMetaData rsmd = rs.getMetaData();
-           
-            while(rs.next()){
-                //data will be added until finish
-                Date date = rs.getDate("RECORD_dATE");
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String strDate = dateFormat.format(date);
-                String stress_score = String.valueOf(rs.getInt("STRESS_SCORE"));
-                String stress_level = rs.getString("STRESS_LEVEL");
-                
-                String tbData[] = {strDate, stress_score, stress_level};
-                DefaultTableModel tblModel = (DefaultTableModel)Stress_Tracker.RecordsTable.getModel();
-                
-                //add string array into JTable
-                tblModel.addRow(tbData);
-            }
-            stress_Tracker.setVisible(true);
-            this.setVisible(false);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(StartQuizPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_DisplayRecordsActionPerformed
-
-    private void DisplayRecordsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DisplayRecordsMouseEntered
-        
-    }//GEN-LAST:event_DisplayRecordsMouseEntered
 
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(StartQuizPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(StartQuizPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(StartQuizPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(StartQuizPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new StartQuizPage().setVisible(true);
-//            }
-//        });
-//        
-//      
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(StartQuizPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(StartQuizPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(StartQuizPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(StartQuizPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new StartQuizPage().setVisible(true);
+            }
+        });
+        
+      
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane Desc;
-    private javax.swing.JButton DisplayRecords;
+    private javax.swing.JTextField EnterName;
     private javax.swing.JButton StartButton;
     private javax.swing.JLabel TestName;
     private javax.swing.JPanel jPanel1;
