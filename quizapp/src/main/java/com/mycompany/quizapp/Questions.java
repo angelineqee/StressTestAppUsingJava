@@ -120,7 +120,7 @@ public class Questions extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(921, 780));
+        setSize(new java.awt.Dimension(921, 745));
 
         jPanel1.setBackground(new java.awt.Color(139, 158, 179));
 
