@@ -5,6 +5,7 @@
 package com.mycompany.quizapp;
 
 import java.awt.Cursor;
+import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -40,15 +40,45 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         LogInUsernameLabel = new javax.swing.JLabel();
         LogInPasswordLabel = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        UsernameTextField = new javax.swing.JTextField();
         LoginButton = new javax.swing.JButton();
-        ClickToSignIn = new javax.swing.JLabel();
+        SignUpLabel = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
-        jLabel1.setText("Login");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 204));
+        setPreferredSize(new java.awt.Dimension(635, 400));
+        setResizable(false);
+
+        jPanel2.setBackground(new java.awt.Color(185, 198, 204));
+        jPanel2.setPreferredSize(new java.awt.Dimension(680, 360));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        AppNameLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
+        AppNameLabel.setForeground(new java.awt.Color(51, 51, 51));
+        AppNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AppNameLabel.setText("~M i n d   Y o u r   M i n d~");
+        jPanel2.add(AppNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 12, 322, -1));
+
+        AppTaglineLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
+        AppTaglineLabel.setForeground(new java.awt.Color(51, 51, 51));
+        AppTaglineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AppTaglineLabel.setText("Measure your stress, manage your well-being");
+        AppTaglineLabel.setAlignmentY(0.0F);
+        jPanel2.add(AppTaglineLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 318, 322, -1));
+
+        jPanel1.setBackground(new java.awt.Color(222, 228, 228));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        LoginTitleLabel.setBackground(new java.awt.Color(51, 51, 51));
+        LoginTitleLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        LoginTitleLabel.setForeground(new java.awt.Color(51, 51, 51));
+        LoginTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LoginTitleLabel.setText("Log in");
+        LoginTitleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(LoginTitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 6, 68, 35));
 
         LogInUsernameLabel.setText("Username:");
 
@@ -56,9 +86,10 @@ public class Login extends javax.swing.JFrame {
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                UsernameTextFieldActionPerformed(evt);
             }
         });
+        jPanel1.add(UsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 67, 254, 34));
 
         LoginButton.setText("Login");
         LoginButton.setFocusable(false);
@@ -76,18 +107,34 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        ClickToSignIn.setText("Click here to sign up");
-        ClickToSignIn.addMouseListener(new java.awt.event.MouseAdapter() {
+        SignUpLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
+        SignUpLabel.setForeground(new java.awt.Color(51, 51, 51));
+        SignUpLabel.setText("Click here to sign up");
+        SignUpLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ClickToSignInMouseClicked(evt);
+                SignUpLabelMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ClickToSignInMouseEntered(evt);
+                SignUpLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                ClickToSignInMouseExited(evt);
+                SignUpLabelMouseExited(evt);
             }
         });
+        jPanel1.add(SignUpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 236, -1, 24));
+
+        jPasswordField1.setPreferredSize(new java.awt.Dimension(64, 22));
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyPressed(evt);
+            }
+        });
+        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 260, 30));
 
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,49 +151,11 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(264, 264, 264)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LogInUsernameLabel)
-                            .addComponent(LogInPasswordLabel))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ClickToSignIn))))
-                .addContainerGap(135, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(230, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(134, Short.MAX_VALUE)))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LogInUsernameLabel)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(LogInPasswordLabel)
-                .addGap(38, 38, 38)
-                .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ClickToSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(132, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(121, Short.MAX_VALUE)))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
         );
 
         pack();
@@ -154,13 +163,12 @@ public class Login extends javax.swing.JFrame {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
+    }//GEN-LAST:event_UsernameTextFieldActionPerformed
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         PreparedStatement ps;
         ResultSet rs;
-        String uname = jTextField1.getText();
+        String uname = UsernameTextField.getText();
         String pass = String.valueOf(jPasswordField1.getPassword());
         
         String query = "SELECT * FROM `users` WHERE `USERNAME` =? AND `USER_PSW` =?";
@@ -178,7 +186,7 @@ public class Login extends javax.swing.JFrame {
                 new StartQuizPage().setVisible(true);
                 this.setVisible(false);
                 StartQuizPage.getUsername(uname);
-                Result.getUsername(uname);
+                Result.setUsername(uname);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Incorrect Username Or Password", "Login Failed", 2);
@@ -250,6 +258,58 @@ public class Login extends javax.swing.JFrame {
         LoginButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_LoginButtonMouseExited
 
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void SignUpLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpLabelMouseClicked
+        new SignUp().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_SignUpLabelMouseClicked
+
+    private void SignUpLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpLabelMouseEntered
+        SignUpLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_SignUpLabelMouseEntered
+
+    private void SignUpLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignUpLabelMouseExited
+        SignUpLabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_SignUpLabelMouseExited
+
+    private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            PreparedStatement ps;
+            ResultSet rs;
+            String uname = UsernameTextField.getText();
+            String pass = String.valueOf(jPasswordField1.getPassword());
+
+            String query = "SELECT * FROM `users` WHERE `USERNAME` =? AND `USER_PSW` =?";
+
+            try {
+                ps = DriverManager.getConnection("jdbc:mysql://localhost/cat201","root","pass123").prepareStatement(query);
+
+                ps.setString(1, uname);
+                ps.setString(2, pass);
+
+                rs = ps.executeQuery();
+
+                if(rs.next())
+                {
+                    new StartQuizPage().setVisible(true);
+                    this.setVisible(false);
+                    StartQuizPage.getUsername(uname);
+                    Result.setUsername(uname);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Incorrect Username Or Password", "Login Failed", 2);
+                }
+
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jPasswordField1KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -284,14 +344,19 @@ public class Login extends javax.swing.JFrame {
 //            }
 //        });
 //    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ClickToSignIn;
     private javax.swing.JLabel LogInPasswordLabel;
     private javax.swing.JLabel LogInUsernameLabel;
     private javax.swing.JButton LoginButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel LoginTitleLabel;
+    private javax.swing.JLabel SignUpLabel;
+    private javax.swing.JTextField UsernameTextField;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
