@@ -39,7 +39,6 @@ public class Login extends javax.swing.JFrame {
 
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
-        AppNameLabel = new javax.swing.JLabel();
         AppTaglineLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         LoginTitleLabel = new javax.swing.JLabel();
@@ -49,6 +48,7 @@ public class Login extends javax.swing.JFrame {
         LoginButton = new javax.swing.JButton();
         SignUpLabel = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -56,23 +56,18 @@ public class Login extends javax.swing.JFrame {
         setBackground(new java.awt.Color(204, 204, 204));
         setPreferredSize(new java.awt.Dimension(635, 400));
         setResizable(false);
+        setSize(new java.awt.Dimension(635, 400));
 
         jPanel2.setBackground(new java.awt.Color(185, 198, 204));
         jPanel2.setPreferredSize(new java.awt.Dimension(680, 360));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        AppNameLabel.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
-        AppNameLabel.setForeground(new java.awt.Color(51, 51, 51));
-        AppNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        AppNameLabel.setText("~M i n d   Y o u r   M i n d~");
-        jPanel2.add(AppNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 12, 322, -1));
 
         AppTaglineLabel.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
         AppTaglineLabel.setForeground(new java.awt.Color(51, 51, 51));
         AppTaglineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AppTaglineLabel.setText("Measure your stress, manage your well-being");
         AppTaglineLabel.setAlignmentY(0.0F);
-        jPanel2.add(AppTaglineLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 318, 322, -1));
+        jPanel2.add(AppTaglineLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 322, -1));
 
         jPanel1.setBackground(new java.awt.Color(222, 228, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -141,7 +136,6 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(SignUpLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 236, -1, 24));
 
-        jPasswordField1.setPreferredSize(new java.awt.Dimension(64, 22));
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
@@ -154,7 +148,14 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 260, 30));
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 320, -1));
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 320, -1));
+
+        jLabel2.setBackground(new java.awt.Color(185, 198, 204));
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 28)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Mind Your Mind");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,6 +169,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void UsernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameTextFieldActionPerformed
@@ -306,7 +308,6 @@ public class Login extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AppNameLabel;
     private javax.swing.JLabel AppTaglineLabel;
     private javax.swing.JLabel LogInPasswordLabel;
     private javax.swing.JLabel LogInUsernameLabel;
@@ -315,6 +316,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel SignUpLabel;
     private javax.swing.JTextField UsernameTextField;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;

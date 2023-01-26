@@ -34,10 +34,12 @@ public class Stress_Tracker extends javax.swing.JFrame {
         Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 624));
+        setBackground(new java.awt.Color(185, 198, 204));
+        setResizable(false);
+        setSize(new java.awt.Dimension(800, 624));
 
         Title.setFont(new java.awt.Font("Bahnschrift", 1, 36)); // NOI18N
-        Title.setForeground(new java.awt.Color(47, 47, 79));
+        Title.setForeground(new java.awt.Color(115, 136, 146));
         Title.setText("Stress Tracker");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -67,6 +69,7 @@ public class Stress_Tracker extends javax.swing.JFrame {
 
         Back.setBackground(new java.awt.Color(245, 247, 244));
         Back.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        Back.setForeground(new java.awt.Color(126, 144, 153));
         Back.setText("Back");
         Back.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -87,7 +90,7 @@ public class Stress_Tracker extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(274, Short.MAX_VALUE)
+                .addContainerGap(276, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(Back)
@@ -117,6 +120,7 @@ public class Stress_Tracker extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseEntered

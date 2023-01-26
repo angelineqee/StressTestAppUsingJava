@@ -78,6 +78,7 @@ public class SignUp extends javax.swing.JFrame {
         ReenterPsw = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(557, 475));
 
         jPanel2.setBackground(new java.awt.Color(222, 228, 228));
 
@@ -122,7 +123,7 @@ public class SignUp extends javax.swing.JFrame {
         jLabel2.setText("Create an account");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        SignUpButton.setBackground(new java.awt.Color(222, 215, 255));
+        SignUpButton.setBackground(new java.awt.Color(209, 216, 222));
         SignUpButton.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 14)); // NOI18N
         SignUpButton.setForeground(new java.awt.Color(102, 102, 102));
         SignUpButton.setText("Sign Up");
@@ -266,6 +267,7 @@ public class SignUp extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void FirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirstNameActionPerformed
@@ -310,8 +312,8 @@ public class SignUp extends javax.swing.JFrame {
                 conn = DriverManager.getConnection("jdbc:mysql://localhost/cat201","root","pass123");
                 pst = conn.prepareStatement(query);
                 pst.setString(1, FirstName.getText());
-                pst.setString(2, Username.getText());
-                pst.setString(3, LastName.getText());
+                pst.setString(2, LastName.getText());
+                pst.setString(3, Username.getText());
                 pst.setString(4, Password.getText());
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "SIGN UP SUCCESSFULLY");
