@@ -438,6 +438,7 @@ public class Questions extends javax.swing.JFrame {
                 result.setScore(totalScore);
                 this.setVisible(false);
                 result.setVisible(true);
+                index=0;
             }
         } else{
             int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to end the test?", "End the test",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
@@ -445,9 +446,9 @@ public class Questions extends javax.swing.JFrame {
                 StartQuizPage startQuiz = new StartQuizPage();
                 startQuiz.setVisible(true);
                 this.setVisible(false);
+                index=0;
             }
         } 
-        index=0;
     }//GEN-LAST:event_EndActionPerformed
 
     
